@@ -6,3 +6,106 @@
 <title>Day #02 - Scientific Calculator | TonyProg </title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 transition-colors duration-300 min-h-screen flex flex-col">
+
+<!-- Navigation Bar -->
+<nav class="w-full shadow-md fixed top-0 left-0 z-20 bg-white dark:bg-gray-900 cyberpunk-bg transition-all duration-300">
+<div class="max-w-3xl mx-auto flex justify-between items-center py-3 px-4">
+<span class="font-bold text-xl cyberpunk-text" id="brand">Scientific Calculator</span>
+<div class="flex items-center gap-4">
+<span class="nav-link" onclick="showSection('calculator')">Calculator</span>
+<span class="nav-link" onclick="showSection('about')">About</span>
+<!-- Theme Switcher Dropdown -->
+<div class="relative">
+<button id="themeBtn" class="nav-link font-bold" onclick="toggleThemeDropdown()">Theme ▼</button>
+<div id="themeDropdown" class="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 transition-all duration-200 scale-0 origin-top" style="z-index:30;">
+<button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-200" onclick="setTheme('light')">Light Mode</button>
+<button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-200" onclick="setTheme('dark')">Dark Mode</button>
+<button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cyberpunk-text" onclick="setTheme('cyberpunk')">Cyberpunk</button>
+</div>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- Main Content -->
+<main class="flex-grow pt-20 pb-8 px-2">
+<!-- Calculator Section -->
+<section id="calculator" class="max-w-3xl mx-auto transition-all duration-500">
+<div id="calc-card" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mt-6 transition-all duration-300">
+<!-- Display -->
+<div class="mb-4">
+<input id="calc-display" type="text" class="w-full bg-gray-100 dark:bg-gray-900 cyberpunk-bg cyberpunk-border text-right text-2xl font-mono rounded-lg p-3 outline-none transition-all duration-300 text-gray-900 dark:text-gray-100 cyberpunk-text" readonly value="0">
+</div>
+<!-- Buttons grid -->
+<div class="grid calc-grid grid-cols-5 gap-3">
+<!-- Row 1 -->
+<button class="calc-btn bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-blue-200" onclick="inputFunc('(')">(</button>
+<button class="calc-btn bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-blue-200" onclick="inputFunc(')')">)</button>
+<button class="calc-btn bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-green-200" onclick="inputFunc('sqrt(')">√</button>
+<button class="calc-btn bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-purple-200" onclick="inputFunc('^')">xʸ</button>
+<button class="calc-btn bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-red-200" onclick="clearDisplay()">C</button>
+<!-- Row 2 -->
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('7')">7</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('8')">8</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('9')">9</button>
+<button class="calc-btn bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-yellow-200" onclick="inputFunc('/')">÷</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('sin(')">sin</button>
+<!-- Row 3 -->
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('4')">4</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('5')">5</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('6')">6</button>
+<button class="calc-btn bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-yellow-200" onclick="inputFunc('*')">×</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('cos(')">cos</button>
+<!-- Row 4 -->
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('1')">1</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('2')">2</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('3')">3</button>
+<button class="calc-btn bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-yellow-200" onclick="inputFunc('-')">-</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('tan(')">tan</button>
+<!-- Row 5 -->
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('0')">0</button>
+<button class="calc-btn bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-200" onclick="inputFunc('.')">.</button>
+<button class="calc-btn bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-green-200" onclick="backspace()">⌫</button>
+<button class="calc-btn bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-yellow-200" onclick="inputFunc('+')">+</button>
+<button class="calc-btn bg-indigo-500 text-white px-3 py-2 rounded-lg font-bold shadow hover:bg-indigo-600 transition-all duration-200" style="grid-column: span 1;" onclick="calculate()">=</button>
+<!-- Row 6 -->
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('log(')">log</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('ln(')">ln</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('exp(')">exp</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('pi')">π</button>
+<button class="calc-btn bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-200 px-3 py-2 rounded-lg font-bold shadow hover:bg-pink-200" onclick="inputFunc('e')">e</button>
+</div>
+</div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="max-w-3xl mx-auto transition-all duration-500 hidden">
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mt-6">
+<h2 class="text-2xl font-bold mb-3 cyberpunk-text">About This Calculator</h2>
+<p class="text-lg mb-2">
+This is a modern, responsive scientific calculator built with HTML, Tailwind CSS, and JavaScript. It supports basic arithmetic, advanced scientific functions, and three stylish themes: Light, Dark, and Cyberpunk!
+</p>
+<ul class="list-disc pl-6 text-base mb-2">
+<li>Basic arithmetic: +, -, ×, ÷, decimals</li>
+<li>Parentheses, exponentiation (xʸ), square root (√)</li>
+<li>Trigonometric functions: sin, cos, tan</li>
+<li>Logarithmic and exponential: log, ln, exp</li>
+<li>Constants: π, e</li>
+<li>Adaptive design: works great on desktop and mobile</li>
+<li>Switch themes between Light, Dark, and Cyberpunk</li>
+</ul>
+<p>
+<span class="font-bold">Note:</span> All calculations use radians for trigonometric functions.
+</p>
+</div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="text-center py-6 text-sm bg-gray-50 dark:bg-gray-900 cyberpunk-bg text-gray-600 dark:text-gray-400 cyberpunk-text transition-colors duration-300">
+© 2024 Scientific Calculator. All rights reserved.
+</footer>
+</body>
+</html>
